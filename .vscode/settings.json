@@ -1,4 +1,7 @@
 {
-"liveServer.settings.port": 5501
-        
+  "liveServer.settings.port": 5501,
+
+  "terminal.integrated.automationProfile.windows": {
+    "terminal.integrated.shell.linux": "/bin/zsh"
+  }
 }
