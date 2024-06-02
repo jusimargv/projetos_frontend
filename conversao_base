@@ -1,0 +1,10 @@
+let number = 123
+
+number.toString(16)
+
+number.toString(8)
+
+number.toString(2)
+
+console.log(number)
+
