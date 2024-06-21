@@ -20,7 +20,7 @@
                 <input type="text" id="productDescription" name="productDescription" class="form-control" required>
             </div>
             <div class="mb-3 input-group">
-                <span class="input-group-text">R$</span>
+                <span class="input-group-text">Preço:</span>
                 <input type="number" id="productPrice" name="productPrice" class="form-control" step="0.01" required>
                 <select id="currency" name="currency" class="form-select" required>
                     <option value="BRL">BRL</option>
@@ -44,7 +44,8 @@
         </form>
 
         <h1 class="mb-4">Listagem de Produtos</h1>
-        <button class="btn btn-success mb-3" onclick="showForm()">Adicionar Novo Produto</button>
+        <button class="btn btn-success mb-3" onclick="addProductFields()">Adicionar Novo Produto</button>
+        <div id="newProductFields" class="mb-3"></div>
         <table id="productTable" class="table table-striped">
             <thead>
                 <tr>

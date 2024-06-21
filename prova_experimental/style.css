@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    background-image: url('images/Background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -64,17 +65,6 @@ th {
 
 tbody tr:nth-child(even) {
     background-color: #f9f9f9;
-}
-
-tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    border: 35px;
-    cursor: pointer;
 }
 
 button:hover {
