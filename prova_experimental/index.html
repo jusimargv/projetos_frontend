@@ -20,7 +20,7 @@
                 <input type="text" id="productDescription" name="productDescription" class="form-control" required>
             </div>
             <div class="mb-3 input-group">
-                <span class="input-group-text">Preço:</span>
+                <span class="input-group-text">Valor do Produto:</span>
                 <input type="number" id="productPrice" name="productPrice" class="form-control" step="0.01" required>
                 <select id="currency" name="currency" class="form-select" required>
                     <option value="BRL">BRL</option>
@@ -44,15 +44,26 @@
         </form>
 
         <h1 class="mb-4">Listagem de Produtos</h1>
-        <button class="btn btn-success mb-3" onclick="addProductFields()">Adicionar Novo Produto</button>
+        <button class="btn btn-success mb-3" onclick="toggleProductFields()">Adicionar Novo Produto</button>
         <div id="newProductFields" class="mb-3"></div>
+        <div class="mb-3">
+            <label for="sortOptions" class="form-label">Ordenar por:</label>
+            <select id="sortOptions" class="form-select" onchange="sortProducts()">
+                <option value="nameAsc">Nome (A-Z)</option>
+                <option value="nameDesc">Nome (Z-A)</option>
+                <option value="priceAsc">Preço (Menor para Maior)</option>
+                <option value="priceDesc">Preço (Maior para Menor)</option>
+                <option value="recent">Mais Recentes</option>
+                <option value="bestSelling">Mais Vendidos</option>
+            </select>
+        </div>
         <table id="productTable" class="table table-striped">
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)">Nome</th>
-                    <th onclick="sortTable(1)">Descrição</th>
-                    <th onclick="sortTable(2)">Preço</th>
-                    <th onclick="sortTable(3)">Disponível</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Disponível</th>
                 </tr>
             </thead>
             <tbody>

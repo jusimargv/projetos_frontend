@@ -67,6 +67,25 @@ tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
 button:hover {
     background-color: #0056b3;
+}
+
+#newProductFields .input-group {
+    margin-bottom: 10px;
+}
+
+#newProductFields .btn-primary {
+    margin-left: 10px;
 }

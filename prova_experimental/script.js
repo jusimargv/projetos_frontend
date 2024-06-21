@@ -1,38 +1,74 @@
 const productForm = document.getElementById('productForm');
 const productTable = document.getElementById('productTable').getElementsByTagName('tbody')[0];
 const newProductFields = document.getElementById('newProductFields');
+let products = [];
+let sortOrder = true; // true para ascendente, false para descendente
 
-productForm.addEventListener('submit', function(event) {
+productForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    addProductToTable(
-        document.getElementById('productName').value,
-        document.getElementById('productDescription').value,
-        parseFloat(document.getElementById('productPrice').value).toFixed(2),
-        document.getElementById('currency').value,
-        document.getElementById('productAvailable').value === 'yes' ? 'Sim' : 'Não'
-    );
+    const product = {
+        name: document.getElementById('productName').value,
+        description: document.getElementById('productDescription').value,
+        price: parseFloat(document.getElementById('productPrice').value).toFixed(2),
+        currency: document.getElementById('currency').value,
+        available: document.getElementById('productAvailable').value === 'yes' ? 'Sim' : 'Não',
+        dateAdded: new Date(),
+        sales: Math.floor(Math.random() * 100), // Simulação de vendas
+        stock: Math.floor(Math.random() * 100) // Simulação de estoque
+    };
+    products.push(product);
+    addProductToTable(product);
     productForm.reset();
-    sortTable(0); // Ordena por nome após adicionar um novo produto
+    sortProducts(); // Ordena após adicionar um novo produto
 });
 
-function sortTable(columnIndex) {
-    const rows = Array.from(productTable.rows);
-    const isNumericColumn = columnIndex === 2; // Coluna de preço é numérica
-    rows.sort((a, b) => {
-        const aText = a.cells[columnIndex].innerText;
-        const bText = b.cells[columnIndex].innerText;
-        return isNumericColumn ? parseFloat(aText.split(' ')[1]) - parseFloat(bText.split(' ')[1]) : aText.localeCompare(bText);
-    });
-    rows.forEach(row => productTable.appendChild(row));
+function addProductToTable(product) {
+    const newRow = productTable.insertRow();
+    newRow.insertCell(0).innerText = product.name;
+    newRow.insertCell(1).innerText = product.description;
+    newRow.insertCell(2).innerText = `${product.currency} ${product.price}`;
+    newRow.insertCell(3).innerText = product.available;
 }
 
-function showForm() {
-    productForm.scrollIntoView({ behavior: 'smooth' });
+function sortProducts() {
+    const sortOption = document.getElementById('sortOptions').value;
+    switch (sortOption) {
+        case 'nameAsc':
+            products.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'nameDesc':
+            products.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+        case 'priceAsc':
+            products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+            break;
+        case 'priceDesc':
+            products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            break;
+        case 'recent':
+            products.sort((a, b) => b.dateAdded - a.dateAdded);
+            break;
+        case 'bestSelling':
+            products.sort((a, b) => b.sales - a.sales);
+            break;
+    }
+    updateProductTable();
+}
+
+function updateProductTable() {
+    productTable.innerHTML = '';
+    products.forEach(product => addProductToTable(product));
+}
+
+function toggleProductFields() {
+    if (newProductFields.innerHTML === '') {
+        addProductFields();
+    } else {
+        newProductFields.innerHTML = '';
+    }
 }
 
 function addProductFields() {
-    newProductFields.innerHTML = ''; // Limpa os campos anteriores
-
     const fieldContainer = document.createElement('div');
     fieldContainer.className = 'input-group mb-3';
 
@@ -83,16 +119,21 @@ function addProductFields() {
     const confirmButton = document.createElement('button');
     confirmButton.className = 'btn btn-primary';
     confirmButton.innerText = 'Confirmar Adição';
-    confirmButton.onclick = function() {
-        addProductToTable(
-            nameInput.value,
-            descriptionInput.value,
-            parseFloat(priceInput.value).toFixed(2),
-            currencySelect.value,
-            availableSelect.value === 'yes' ? 'Sim' : 'Não'
-        );
+    confirmButton.onclick = function () {
+        const product = {
+            name: nameInput.value,
+            description: descriptionInput.value,
+            price: parseFloat(priceInput.value).toFixed(2),
+            currency: currencySelect.value,
+            available: availableSelect.value === 'yes' ? 'Sim' : 'Não',
+            dateAdded: new Date(),
+            sales: Math.floor(Math.random() * 100), // Simulação de vendas
+            stock: Math.floor(Math.random() * 100) // Simulação de estoque
+        };
+        products.push(product);
+        addProductToTable(product);
         newProductFields.innerHTML = ''; // Limpa os campos após adicionar o produto
-        sortTable(0); // Ordena por nome após adicionar um novo produto
+        sortProducts(); // Ordena após adicionar um novo produto
     };
 
     fieldContainer.appendChild(nameInput);
@@ -103,12 +144,4 @@ function addProductFields() {
     fieldContainer.appendChild(confirmButton);
 
     newProductFields.appendChild(fieldContainer);
-}
-
-function addProductToTable(name, description, price, currency, available) {
-    const newRow = productTable.insertRow();
-    newRow.insertCell(0).innerText = name;
-    newRow.insertCell(1).innerText = description;
-    newRow.insertCell(2).innerText = `${currency} ${price}`;
-    newRow.insertCell(3).innerText = available;
 }
