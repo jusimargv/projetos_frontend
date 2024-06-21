@@ -6,12 +6,13 @@ productForm.addEventListener('submit', function(event) {
     const name = document.getElementById('productName').value;
     const description = document.getElementById('productDescription').value;
     const price = parseFloat(document.getElementById('productPrice').value).toFixed(2);
+    const currency = document.getElementById('currency').value;
     const available = document.getElementById('productAvailable').value === 'yes' ? 'Sim' : 'Não';
 
     const newRow = productTable.insertRow();
     newRow.insertCell(0).innerText = name;
     newRow.insertCell(1).innerText = description;
-    newRow.insertCell(2).innerText = price;
+    newRow.insertCell(2).innerText = `${currency} ${price}`;
     newRow.insertCell(3).innerText = available;
 
     productForm.reset();
@@ -24,7 +25,7 @@ function sortTable(columnIndex) {
     rows.sort((a, b) => {
         const aText = a.cells[columnIndex].innerText;
         const bText = b.cells[columnIndex].innerText;
-        return isNumericColumn ? parseFloat(aText) - parseFloat(bText) : aText.localeCompare(bText);
+        return isNumericColumn ? parseFloat(aText.split(' ')[1]) - parseFloat(bText.split(' ')[1]) : aText.localeCompare(bText);
     });
     rows.forEach(row => productTable.appendChild(row));
 }

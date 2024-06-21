@@ -1,5 +1,10 @@
 body {
     font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
 }
 
 h1 {
@@ -8,11 +13,26 @@ h1 {
 
 form {
     margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+    padding: 20px;
+    border-radius: 8px;
 }
 
 label {
     display: block;
     margin-top: 10px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group-text {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    padding: 8px;
+    border-radius: 0.25rem;
 }
 
 input, select, button {
@@ -26,6 +46,9 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 th, td {
@@ -50,7 +73,7 @@ tbody tr:hover {
 button {
     background-color: #007bff;
     color: white;
-    border: none;
+    border: 35px;
     cursor: pointer;
 }
 

@@ -19,9 +19,19 @@
                 <label for="productDescription" class="form-label">Descrição do Produto:</label>
                 <input type="text" id="productDescription" name="productDescription" class="form-control" required>
             </div>
-            <div class="mb-3">
-                <label for="productPrice" class="form-label">Valor do Produto:</label>
+            <div class="mb-3 input-group">
+                <span class="input-group-text">R$</span>
                 <input type="number" id="productPrice" name="productPrice" class="form-control" step="0.01" required>
+                <select id="currency" name="currency" class="form-select" required>
+                    <option value="BRL">BRL</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="AUD">AUD</option>
+                    <option value="CAD">CAD</option>
+                    <option value="CHF">CHF</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="productAvailable" class="form-label">Disponível para Venda:</label>
